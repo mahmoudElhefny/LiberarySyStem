@@ -1,0 +1,52 @@
+﻿@model List<Publisher>
+@{
+    Layout = "_AdminLayout";
+}
+
+@*<a href="/Publisher/Add" class="btn btn-success">Add New</a>*@
+<div class="row">
+    <h2 class="text-center shadow  mb-5 p-3">Publishers</h2>
+    @foreach (Publisher item in Model)
+    {
+        <div class="col-12 col-md-6 shadow mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Published At : @item.StablishedAt</h6>
+                    <p class="card-text">Contact No : @item.Phone</p>
+                    <a href="/Publisher/Edit/@item.Id" title="Edit" class="card-link fs-3 text-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="#" title="Remove" class="card-link fs-3 text-danger" data-bs-toggle="modal" data-bs-target="#myModal-@item.Id"><i class="fa-solid fa-trash-can"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal-@item.Id">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Publisher</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Are You Sure To Delete Publisher <strong>@item.Name</strong>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <form asp-action="Delete" asp-controller="Publisher" asp-route-id="@item.Id" method="post">
+                            <input type="submit" value="Confirm" class="btn btn-outline-danger" />
+                        </form>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

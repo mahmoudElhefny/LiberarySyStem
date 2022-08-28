@@ -1,0 +1,85 @@
+﻿@model List<Book>
+@{
+    Layout = "_AdminLayout";
+}
+<style>
+    #imageDiv{
+        background-image:url("/Images/AppImage/Loading.gif");
+        background-repeat:no-repeat;
+        background-position:center;
+        height : 300px;
+    }
+</style>
+<div class="row">
+    @*<div class="col-12 col-md-1"></div>*@
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-6">
+            <div class="card mb-5">
+                <div id="imageDiv">
+                <img src="/Images/Book/@item.CoverImage" height="300" class="card-img-top"  />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text text-truncate">
+                        @item.Description
+                    </p>
+                    <p class="card-text">
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="text-muted">@item.author.Name</small>
+                            </div>
+                            <div class="col-3">
+                                <a href="/Book/Update/@item.Id" title="Edit"><i class="fa-solid fa-pen-to-square text-success fs-4"></i></a>
+                            </div>
+                            <div class="col-3">
+                                <a href="" title="Remove" data-bs-toggle="modal" data-bs-target="#myModal-@item.Id"><i class="fa-solid fa-trash-can text-danger fs-4"></i></a>
+                            </div>
+                        </div>
+                    </p>
+                    <div class="row">
+                        <div class="col-12 col-md-2"></div>
+                        <div class="col-12 col-md-8">
+                            <a href="/Book/GetById/@item.Id" class="form-control btn  btn-outline-dark ">Details</a>
+                        </div>
+                        <div class="col-12 col-md-2"></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal -->
+<div class="modal" id="myModal-@item.Id">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Book</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Are You Sure To Delete With Title <strong>@item.Title</strong>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <form asp-action="Delete" asp-controller="Book" asp-route-id="@item.Id" method="post">
+              <input type="submit" value="Confirm" class="btn btn-outline-danger"/>
+          </form>
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    }
+    
+</div>
+
+<div class="m-5">
+    <div class="m-5">
+        <a href="/Home/Index" class="btn btn-outline-dark form-control">Back To Home</a>
+    </div>
+</div>

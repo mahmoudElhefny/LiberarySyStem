@@ -1,0 +1,19 @@
+﻿@using Library.ViewModel
+@model BookVM
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 shadow p-4 ">
+        <h4>Add New Book</h4>
+        <hr />
+        <form asp-action="Update" asp-controller="Book" method="post" enctype="multipart/form-data">
+            <partial name="_Form" model="Model" />
+        </form>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

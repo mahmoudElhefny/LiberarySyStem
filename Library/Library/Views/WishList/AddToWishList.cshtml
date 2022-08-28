@@ -1,0 +1,34 @@
+﻿@model WishList
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8 shadow p-3">
+        <form asp-action="Add" asp-controller="WishList" method="post">
+            <h4>Add To WishList For Test</h4>
+                <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId">Enter User ID</label>
+                <input asp-for="UserId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BookId">Enter Book ID</label>
+                <input asp-for="BookId" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Add To WishList" class="btn btn-primary form-control" />
+            </div>
+            <br />
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

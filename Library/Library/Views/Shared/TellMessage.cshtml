@@ -1,0 +1,36 @@
+﻿@model TellMessage
+<div class="row">
+    <div class="col-12 col-md-3"></div>
+    <div class="col-12 col-md-6 mt-5">
+        @if (Model.Header == "Error")
+        {
+            <div class="alert alert-danger p-3 pt-5 pb-5 ">
+                <div><strong>Error!</strong></div><hr /><br><br>
+                 @Model.Message
+                <br /><br /><br />
+                <a href="/@Model.Controller/@Model.Action" class="form-control btn btn-outline-danger">@Model.ButtonLabel</a>
+            </div>
+        }
+        else if (Model.Header == "Warning")
+        {
+             
+            <div class="alert alert-warning p-3 pt-5 pb-5 ">
+                <div><strong>Warning!</strong></div><hr /><br /><br />
+                 @Model.Message
+                <br /><br /><br />
+                <a href="/@Model.Controller/@Model.Action" class="form-control btn btn-outline-warning">@Model.ButtonLabel</a>
+            </div>
+        }
+        else if (Model.Header == "Success")
+        {
+            <div class="alert alert-success p-3 pt-5 pb-5 ">
+                <div><strong>Success!</strong></div><hr /><br><br>
+                 @Model.Message
+                <br /><br /><br />
+                <a href="/@Model.Controller/@Model.Action" class="form-control btn btn-outline-success">@Model.ButtonLabel</a>
+            </div>
+        }
+        
+    </div>
+    <div class="col-12 col-md-3"></div>
+</div>

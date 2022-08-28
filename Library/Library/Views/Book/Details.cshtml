@@ -1,0 +1,105 @@
+﻿@using System.Security.Claims
+@model Book
+@{
+    bool IsInWishList = false;
+    string userId = "";
+    if (User.Identity.IsAuthenticated)
+    {
+        IsInWishList = (bool)ViewData["IsInWishListResult"];
+        userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+    }
+    
+}
+<style>
+    #imageDiv{
+        background-image:url("/Images/AppImage/Loading.gif");
+        background-repeat:no-repeat;
+        background-position:center;
+        height : 300px;
+    }
+   
+    body{
+        overflow-x:hidden;
+    }
+</style>
+<div class="row">
+    <div class="col-12 col-md-1"></div>
+    <div class="col-12 col-md-10">
+        <h4 class="bg-dark text-center border-2 text-white mb-3 mt-4 mb-4">Book Details</h4>
+    </div>
+    <div class="col-12 col-md-1"></div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-1"></div>
+    <div class="col-12 col-md-10 shadow">
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4" id="imageDiv">
+                    <img src="/Images/Book/@Model.CoverImage" class="rounded-start img-fluid m-3" alt="Cover For @Model.Title Book.">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Title</h5>
+                        <div>
+                            <strong>Page Count : </strong>@Model.PagesCount
+                        </div>
+                        <div>
+                            <strong>Book Publisher : </strong>@Model.Publisher.Name
+                        </div>
+                        <div>
+                            <strong>Category : </strong>@Model.Category.Name
+                        </div>
+                        <div>
+                            <strong>Published In : </strong>@Model.PublishedYear Since : @Model.BookAge Year.
+                        </div>
+                        <div>
+                            <strong>Copies In Library : </strong>@Model.Copies
+                        </div>
+                        <div>
+                            <strong>Availability In Library : </strong>@Model.IsAvalable
+                        </div>
+                        <div>
+                            <strong>Book ISBN : </strong>@Model.ISBN
+                        </div>
+                        <div>
+                            <strong>Book Version: </strong>@Model.Version
+                        </div>
+                        <p class="card-text"><strong>Description Of The Book : </strong><br />@Model.Description</p>
+                        <p class="card-text">By : <small class="text-muted">@Model.author.Name</small></p>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            if(IsInWishList == true)
+                            {
+                         <a href="/WishList/RemoveFromWishList/@Model.Id" title="@User.Identity.Name Click To Remove from Your WishList">
+                             <i class="fa-solid fa-heart-circle-check  text-danger fs-3"></i>
+                         </a>
+                            }
+                            else{
+                                <a href="/WishList/Add?UserId=@userId&BookId=@Model.Id" title="@User.Identity.Name Click To Add To Your WishList">
+                                    <i class="fa-solid fa-heart-circle-plus text-danger fs-3"></i>
+                                </a>
+                            }
+
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12 col-md-1"></div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-1"></div>
+    <div class="col-12 col-md-5 mt-5 mb-5">
+        <a href="/Home/Index" class="btn btn-outline-dark form-control">Go Back</a>
+    </div>
+    @if(User.IsInRole("Admin")){
+        <div class="col-12 col-md-5 mt-5 mb-5">
+            <a href="/Book/ShowAll" class="btn text-danger btn-outline-dark form-control">Back To Admin</a>
+        </div>
+    }
+    <div class="col-12 col-md-1"></div>
+</div>

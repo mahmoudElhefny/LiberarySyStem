@@ -1,0 +1,68 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Home Page";
+    List<Book> UserWishList = new List<Book>();
+    if (User.Identity.IsAuthenticated)
+    {
+        UserWishList = (List<Book>)ViewData["WishList"];
+    }
+    
+}
+<style>
+    #imageDiv{
+        background-image:url("/Images/AppImage/Loading.gif");
+        background-repeat:no-repeat;
+        background-position:center;
+        height : 300px;
+    }
+</style>
+
+<div class="container-fluid">
+    <h1 class="shadow m-5 text-center p-3">Filter Results</h1>
+     <div class="row mt-3">
+        @foreach(var item in Model){
+            <div class="col-12 col-md-4">
+                <a href="/Book/GetById/@item.Id" class="d-inline-block text-decoration-none text-dark">
+            <div class="card mb-5">
+                <div id="imageDiv"><img src="/Images/Book/@item.CoverImage" height="300" class="card-img-top" alt="Wild Landscape" />
+                </div>
+                 <div class="card-body">
+                    <h5 class="card-title mb-3 pb-5" style="overflow:clip;text-overflow: clip;height:25px">@item.Title</h5>
+                    <hr>
+                    <p class="card-text" style="overflow:clip;text-overflow:clip;height:50px">
+                        @item.Description
+                    </p>
+                    <p class="card-text">
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="text-muted">@item.author.Name</small>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-2">
+                                        @if(User.Identity.IsAuthenticated)
+                                        {
+                                            if (UserWishList != null)
+                                            {
+                                              foreach (Book book in UserWishList)
+                                              {
+                                                    if(book.Id== @item.Id)
+                                                    {
+                                                      <i class="fa-solid fa-star text-danger"></i>
+                                                    }
+                                              }   
+                                            }
+                                                                                        
+                                        }
+                            </div>
+                        </div>
+                        
+                    </p>
+                </div>
+            </div>
+            </a>
+        </div>
+        
+       
+        }
+        </div>
+</div>

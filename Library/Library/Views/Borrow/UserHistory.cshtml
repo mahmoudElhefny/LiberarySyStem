@@ -1,0 +1,27 @@
+﻿@{
+    var users = ViewBag.users;
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8">
+        <h2 class="text-dark text-center fs-4 shadow p-3">Search For User Borrow Operation</h2>
+        <form action="/Borrow/UserHistory" method="post">
+            <label>Select User</label>
+            <select name="UserName" class="form-control">
+                @foreach (var item in users)
+                {
+                    <option value="@item.UserName">@item.UserName</option>
+                }
+            </select>
+            <div class="row mt-5 mb-5">
+                <div class="col-12 col-md-6">
+                    <input type="submit" value="Ok" class="form-control btn btn-outline-success" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <a href="" class="form-control btn btn-outline-dark">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>

@@ -1,0 +1,8 @@
+To Run Project Follow the Following Steps : 
+-  add migration
+-  change server Name in connection string Accoring to Your Server
+-  go to route /admin/index then add 2 roles (Admin-Visitor) and create Account as admin
+************previous Steps is Required************************
+
+-  if you want to run sample data add book images into /Images/Book
+-  then run SQL file <SampleData.sql>

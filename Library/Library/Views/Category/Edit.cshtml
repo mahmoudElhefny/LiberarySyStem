@@ -1,0 +1,30 @@
+﻿@model Category
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8">
+        <h1 class="p-3 shadow mb-5 text-center">Edit Category</h1>
+        <form asp-action="Edit" >
+            <div>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 col-md-6">
+                    <input type="submit" value="Save Edit" class="btn btn-outline-success form-control" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <a href="/Category/Index" class="btn btn-outline-dark form-control">Back To Category</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

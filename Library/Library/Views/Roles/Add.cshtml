@@ -1,0 +1,32 @@
+﻿@model Library.ViewModel.Account.RolesVM
+
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8 shadow p-3">
+        <form asp-action="Add">
+            <h4>Add New Role</h4>
+                <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+            <br />
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

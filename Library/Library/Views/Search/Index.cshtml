@@ -1,0 +1,87 @@
+﻿@using Library.ViewModel
+@*@using Library.ViewModel
+@model SearchForBookVM*@
+@model List<Author>
+@{
+    string error = ViewBag.ErrorMSG;
+    List<Category> categories = (List<Category>)ViewData["categories"];
+}
+<style>
+    body{
+        overflow-x:hidden;
+    }
+</style>
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8 text-warning fs-3 text-center">
+        @if (error != null){ <div class="text-center">Warning</div><div class="text-muted">@error</div> }
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8 mt-5 mb-4">
+        <h4>Find Book By Book Name Or Book ISBN</h4>
+        <form action="/Search/SearchByTitleOrISBN" method="post">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <input ttype="text" name="SearchText" id="SearchText" placeholder="Search Title Or ISBN" class="form-control" />
+                </div>
+                <div class="col-12 col-md-4">
+                    <input type="submit" value="Find Book" class="btn btn-outline-dark form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+
+@if (Model != null)
+{
+    <div class="row ">
+        <div class="col-12 col-md-2"></div>
+        <div class="col-12 col-md-8 mt-4 mb-4">
+            <h4>Find Book(s) Related To Author</h4>
+            <form asp-action="SearchByAuthor" asp-controller="Search">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <select name="Id" class="form-control">
+                            @foreach (var item in Model)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <input type="submit" value="Find Book(s)" class="btn btn-outline-dark form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-2"></div>
+    </div>
+}
+@if(categories!=null){
+<div class="row ">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8 mt-4">
+        <h4>Find Book(s) Related To Category</h4>
+        <form asp-action="SearchByCategory" asp-controller="Search">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <select name="Id" class="form-control">
+                            @foreach (var item in categories)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                </div>
+                <div class="col-12 col-md-4">
+                    <input type="submit" value="Find Book" class="btn btn-outline-dark form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+}

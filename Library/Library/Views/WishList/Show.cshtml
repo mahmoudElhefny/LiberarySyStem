@@ -1,0 +1,53 @@
+﻿@model List<Book>
+<style>
+    #imageDiv{
+        background-image:url("/Images/AppImage/Loading.gif");
+        background-repeat:no-repeat;
+        background-position:center;
+        height : 300px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        @foreach(var item in Model){
+        <div class="col-12 col-md-4">
+            <div class="card mb-5">
+                <a href="/Book/GetById/@item.Id" class="text-decoration-none text-dark">
+                    <div id="imageDiv">
+                <img src="/Images/Book/@item.CoverImage" height="300" class="card-img-top" alt="Wild Landscape" />
+                </div>
+                </a>
+
+                <div class="card-body">
+                    <a href="/Book/GetById/@item.Id" class="text-decoration-none text-dark">
+                    <h5 class="card-title mb-3 pb-5" style="text-overflow:clip;height:25px">@item.Title</h5>
+                    </a>
+                    <hr>
+                    <p class="card-text" style="overflow:clip;text-overflow:clip;height:50px">
+                        @item.Description
+                    </p>
+                    <p class="card-text">
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="text-muted">@item.author.Name</small>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-2">
+                                <a href="/WishList/RemoveFromWishList/@item.Id" title="Remove From WishList"><i class="fa-solid fa-heart-circle-check fs-3 text-danger"></i></a>
+                            </div>
+                        </div>
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+       
+        }
+        </div>
+
+        <div class="m-5">
+            <div class="m-5">
+                <a href="/Home/Index" class="btn btn-outline-dark form-control">Back To Home</a>
+            </div>
+        </div>
+    </div>

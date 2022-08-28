@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Library</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Library.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+    
+</head>
+<body>
+    @Html.Partial("_AppNavBar")
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-4">
+
+                <button class="btn btn-dark form-control" type="button" data-bs-toggle="collapse" data-bs-target="#admin" aria-expanded="false" aria-controls="collapseExample">
+                    Admin
+                </button>
+                <div id="admin" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2  text-decoration-none" href="/Admin/Add">Add New Admin</a>
+                </div>
+
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#role" aria-expanded="false" aria-controls="collapseExample">
+                    Role
+                </button>
+                <div id="role" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Roles/Add">Add New Role</a>
+                </div>
+
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#book" aria-expanded="false" aria-controls="collapseExample">
+                    Book
+                </button>
+                <div id="book" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Book/Add">Add Book</a>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Book/ShowAll">Show All Book</a></li>
+                </div>
+
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#author" aria-expanded="false" aria-controls="collapseExample">
+                    Author
+                </button>
+                <div id="author" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Author/Add">Add New Author</a>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Author/Index">Show All Authors</a></li>
+                </div>
+
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="false" aria-controls="collapseExample">
+                    Category
+                </button>
+                <div id="category" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Category/Add">Add New Category</a>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Category/Index">Show All Categories</a></li>
+                </div>
+
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#publisher" aria-expanded="false" aria-controls="collapseExample">
+                    Publisher
+                </button>
+                <div id="publisher" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Publisher/Add">Add New Publisher</a>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Publisher/Index">Show All Publishers</a></li>
+                </div>
+                <button class="btn btn-dark form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#borrow" aria-expanded="false" aria-controls="collapseExample">
+                    Borrow
+                </button>
+                <div id="borrow" class="mt-3 collapse">
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Borrow/MakeBorrow">Make Borrow</a>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Borrow/Index">Show All</a></li>
+                    <a class="btn btn-outline-dark form-control mb-2 text-decoration-none" href="/Borrow/UserHistory">User History</a></li>
+                </div>
+                
+  
+        </div>
+        <div class="col-12 col-md-8" style="min-height:410px">
+            @RenderBody()
+        </div>
+    </div>
+  </div>
+    @Html.Partial("_Footer")
+    @await RenderSectionAsync("Scripts", required: false)
+  </body>
+</html>

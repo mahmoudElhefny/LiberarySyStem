@@ -1,0 +1,178 @@
+﻿@using Library.ViewModel
+@model BookVM
+@{
+    var extra = (AuthorCategoryPublisherVM)ViewData["Extra"];//from add
+    var extra2 = (AuthorCategoryPublisherVM)ViewData["Extra2"];//from update
+}
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="ISBN" class="control-label"></label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="Copies" class="control-label"></label>
+            <input asp-for="Copies" class="form-control" />
+            <span asp-validation-for="Copies" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="PublishedYear" class="control-label"></label>
+            <input asp-for="PublishedYear" class="form-control" />
+            <span asp-validation-for="PublishedYear" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="Version" class="control-label"></label>
+            <input asp-for="Version" class="form-control" />
+            <span asp-validation-for="Version" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="PagesCount" class="control-label"></label>
+            <input asp-for="PagesCount" class="form-control" />
+            <span asp-validation-for="PagesCount" class="text-danger"></span>
+        </div>
+    </div>
+    @if (extra != null)
+    {
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label asp-for="PublisherId" class="control-label"></label>
+                <select name="PublisherId" id="PublisherId" class="form-control">
+                    <option value="-1"><------ select Publisher ------></option>
+                    @foreach (var publisher in extra.publishers)
+                    {
+                        <option value="@publisher.Id">@publisher.Name</option>
+                    }
+            </select>
+            <span asp-validation-for="PublisherId" class="text-danger"></span>
+        </div>
+    </div>
+    }
+    @if (extra2 != null)
+    {
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label asp-for="PublisherId" class="control-label"></label>
+                <select name="PublisherId" id="PublisherId" class="form-control">
+                    <option value="-1"><------ select Publisher ------></option>
+                    @foreach (var publisher in extra2.publishers)
+                    {
+                        if(Model.PublisherId==publisher.Id){
+                        <option value="@publisher.Id" selected>@publisher.Name</option>
+                        }
+                        <option value="@publisher.Id">@publisher.Name</option>
+                    }
+            </select>
+            <span asp-validation-for="PublisherId" class="text-danger"></span>
+        </div>
+    </div>
+    }
+</div>
+ @if (extra != null){
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="AuthorId" class="control-label"></label>
+            <select name="AuthorId" id="AuthorId" class="form-control">
+                <option value="-1"><------ select Author ------></option>
+                @foreach (var author in extra.authors)
+                {
+                    <option value="@author.Id">@author.Name</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="CategoryId" class="control-label"></label>
+            <select name="CategoryId" id="CategoryId" class="form-control">
+                <option value="-1"><------ select Category ------></option>
+                @foreach (var cat in extra.categories)
+                {
+                    <option value="@cat.Id">@cat.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+}
+ @if (extra2 != null){
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="AuthorId" class="control-label"></label>
+            <select name="AuthorId" id="AuthorId" class="form-control">
+                <option value="-1"><------ select Author ------></option>
+                @foreach (var author in extra2.authors)
+                {
+                    if(Model.AuthorId==author.Id){
+                    <option value="@author.Id" selected>@author.Name</option>
+                    }
+                    <option value="@author.Id">@author.Name</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="CategoryId" class="control-label"></label>
+            <select name="CategoryId" id="CategoryId" class="form-control">
+                <option value="-1"><------ select Category ------></option>
+                @foreach (var cat in extra2.categories)
+                {
+                    if(Model.CategoryId==cat.Id){
+                    <option value="@cat.Id" selected>@cat.Name</option>
+                    }
+                    <option value="@cat.Id">@cat.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+}
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="form-group form-check mt-4">
+            <label class="form-check-label ">
+                <input class="form-check-input" asp-for="IsAvalable" /> @Html.DisplayNameFor(model => model.IsAvalable)
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input type="file" asp-for="ImageFile" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input type="submit" value="Save" class="btn btn-outline-dark form-control mt-5 mb-2" />
+</div>

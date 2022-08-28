@@ -1,0 +1,76 @@
+﻿@model  List<Book>
+@{
+    Layout = "_AdminLayout";
+    var users = ViewBag.Users;
+    var message = ViewData["message"];
+}
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8">
+        @if(message!=null){
+        <h2 class="text-danger text-center fs-4">@message</h2>
+        }
+        <h2 class="text-dark text-center fs-4 shadow p-3">Register Book To Borrow</h2>
+        <form action="/Borrow/MakeBorrowOperation" method="post" class="borrow">
+            <div asp-validation-summary="All"></div>
+            <label>Select User</label>
+            <select name="UserName" class="form-control">
+                @foreach (var item in users)
+                {
+                    <option value="@item.UserName">@item.UserName</option>
+                }
+            </select>
+            <label>Select Book</label>
+            <select name="BookTitle" class="form-control">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Title">@item.Title</option>
+                }
+            </select>
+            <div class="row mb-5">
+                <div class="col-12 col-md-6">
+                    <label>Hire Date</label>
+                    <input type="date" name="HireDate" id="hire" class="form-control" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <label>Retrieve Date</label>
+                    <input type="date" name="RetrieveDate" id="retrieve" class="form-control" />
+                </div>
+                 <div id="errorMSG" class="m-3 text-danger"></div>
+            </div>            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <input type="submit" value="Ok" class="form-control btn btn-outline-success"/>
+                </div>
+                <div class="col-12 col-md-6">
+                    <a href="" class="form-control btn btn-outline-dark">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-2"></div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script>
+        $(document).ready(function() {
+            $('.borrow').on('submit', function(e) {
+
+                var hireDate = document.getElementById("hire").value;
+                var retrieveDate = document.getElementById("retrieve").value;
+                var current = new Date().toISOString();
+                if (hireDate < retrieveDate) {
+                    
+                }
+                else {
+                    document.getElementById("errorMSG").innerHTML = "Borrow Date Must Before Retrieve Date , and start from Now Or After";
+                    e.preventDefault();
+
+                }
+            });
+        });
+    </script>

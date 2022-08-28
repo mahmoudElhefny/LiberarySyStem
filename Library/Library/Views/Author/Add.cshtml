@@ -1,0 +1,35 @@
+﻿@model Library.ViewModel.AuthorVM
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+     <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1 class="p-3 shadow mb-5 text-center">Add New Authors</h1>
+        <form asp-action="Add">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthYear" class="control-label"></label>
+                <input asp-for="BirthYear" class="form-control" />
+                <span asp-validation-for="BirthYear" class="text-danger"></span>
+            </div>
+            <div class="row mt-5 mb-5">
+                <div class="col-12 col-md-6">
+                    <input type="submit" value="Create" class="btn btn-outline-success form-control" />
+                </div>
+                <div class="col-12 col-md-6">
+                     <a asp-action="Index" class="btn btn-outline-dark form-control">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

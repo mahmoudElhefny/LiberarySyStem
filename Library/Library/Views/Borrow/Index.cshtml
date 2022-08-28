@@ -1,0 +1,44 @@
+﻿@model List<BorrowBooks>
+@{
+    Layout = "_AdminLayout";
+    string Message = ViewBag.Message;
+}
+
+<div class="row">
+    <div class="col-12 col-md-2"></div>
+    <div class="col-12 col-md-8">
+        @if (Message != null)
+        {
+            <h1 class="text-warning">@Message</h1>
+        }
+        else
+        {
+            foreach (BorrowBooks item in Model)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        @item.UserName
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>Book Title : @item.BookTitle</p>
+                            <footer class="blockquote-footer">From : <strong>@item.HireDate.Date.ToString().Substring(0,11)</strong>  to : <strong>@item.RetrieveDate.ToString().Substring(0,11)</strong></footer>
+                        </blockquote>
+                        <div>
+                            @if (item.IsRetrived)
+                            {
+                                <div class="text-success mt-4"><strong class="d-inline-block" style="margin-right:50px">Retrieved </strong> <i class="fa-solid fa-check-double text-success fs-4"></i></div>
+                            }
+                            else
+                            {
+                                <a href="/Borrow/Deliver?UserName=@item.UserName&BookTitle=@item.BookTitle" class="mt-4 form-control btn btn-outline-danger">Sign As Delivered</a>
+                            }
+                        </div>
+                    </div>
+                    
+                </div>
+            }
+        }
+    </div>
+        <div class="col-12 col-md-2"></div>
+</div>

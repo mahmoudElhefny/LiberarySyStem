@@ -1,0 +1,54 @@
+﻿@model List<Author>
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <h1 class="p-3 shadow mb-5 text-center">Authors</h1>
+@foreach(Author item in Model){
+<div class="col-12 col-md-6 mb-4 shadow">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Born In : @item.BirthYear</h6>
+                <div class="row mb-2">
+                    <div class="col-12 col-md-6"></div>
+                    <div class="col-12 col-md-3">
+                                         <a href="/Author/Edit/@item.Id" title="Edit"><i class="fa-solid fa-pen-to-square text-success fs-4"></i></a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                                         <a href="" title="Remove" data-bs-toggle="modal" data-bs-target="#myModal-@item.Id"><i class="fa-solid fa-trash-can text-danger fs-4"></i></a>
+                    </div>
+                    </div>
+            </div>
+        </div>
+</div>
+
+ <!-- The Modal -->
+<div class="modal" id="myModal-@item.Id">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Author</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Are You Sure To Delete Author : <strong>@item.Name</strong>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <form asp-action="Delete" asp-controller="Author" asp-route-id="@item.Id" method="post">
+              <input type="submit" value="Confirm" class="btn btn-outline-danger"/>
+          </form>
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+}
+</div>
